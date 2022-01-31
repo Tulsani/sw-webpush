@@ -12,24 +12,21 @@
             userVisibleOnly: true,
             applicationServerKey: urlB64ToUint8Array(config.pushKey),
         });
-        fetch('https://qarsfcmy37.execute-api.us-east-1.amazonaws.com/default/webPushHandler',
-        {method:'POST',
-    headers:{
-        'Accept':'application/json',
-        'Content-Type':'application/json'
-    },
-    mode:'cors',
-    body: JSON.stringify({'subDetail':JSON.stringify({subscription})
-    ,'topicID':'news'})
-    }
-        ).then((resp)=>{
-            if(!resp.ok){
-                console.log(resp);
-            }
-            else{
-                console.log(resp);
-            }
-        })
+   fetch("https://qarsfcmy37.execute-api.us-east-1.amazonaws.com/default/webPushHandler" ,
+   {
+   method:'POST',
+   headers:
+   {   'Accept': 'application/json',
+      'Content-Type': 'application/json'},
+   mode: 'cors',
+   body: JSON.stringify({"productItem":"somethingNice"})
+   })
+   .then((res) =>{ console.log(res);
+     alert("product added successesfully");
+     // location.reload(true);
+     // document.getElementById("upload_processing").style.display = "none";
+   })
+   .catch((err) => console.log(err));
         }
         function urlB64ToUint8Array(base64String) {
         const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
