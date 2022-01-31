@@ -1,0 +1,51 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <button onclick = "subscribe('news')">Subscribe</button>
+    <script>
+       const config = { pushKey: "BEMeYHVPJYwEMH-N46AuKWrZ73MTSVj0RLxLRGlC8umsxnqWLCDaIr31rTdTPdY_n4tFGpJoarPkIWgbx3xPKbY" };
+        async function subscribe(topic) {
+        swReg = await navigator.serviceWorker.register("/sw.js");
+        const subscription = await swReg.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlB64ToUint8Array(config.pushKey),
+        });
+        fetch('https://qarsfcmy37.execute-api.us-east-1.amazonaws.com/default/webPushHandler',
+        {method:'POST',
+    headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+    },
+    mode:'cors',
+    body: JSON.stringify({'subDetail':JSON.stringify({subscription})
+    ,'topicID':'news'})
+    }
+        ).then((resp)=>{
+            if(!resp.ok){
+                console.log(resp);
+            }
+            else{
+                console.log(resp);
+            }
+        })
+        }
+        function urlB64ToUint8Array(base64String) {
+        const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+        const base64 = (base64String + padding)
+            .replace(/\-/g, "+")
+            .replace(/_/g, "/");
+
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+        }
+        return outputArray;
+        } 
+        subscribe('news');
+    </script>
+    </body>
+</html>
