@@ -20,10 +20,11 @@
       'Content-Type': 'application/json',
    'Access-Control-Allow-Origin':'*'},
    mode: 'cors',
-   body: JSON.stringify({"productItem":"somethingNice"})
+   body: JSON.stringify({'subDetail':JSON.stringify({subscription})
+    ,'topicID':'news'})
    })
    .then((res) =>{ console.log(res);
-     alert("product added successesfully");
+     alert("subcribed successfully");
      // location.reload(true);
      // document.getElementById("upload_processing").style.display = "none";
    })
