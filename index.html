@@ -7,7 +7,7 @@
     <script>
        const config = { pushKey: "BEMeYHVPJYwEMH-N46AuKWrZ73MTSVj0RLxLRGlC8umsxnqWLCDaIr31rTdTPdY_n4tFGpJoarPkIWgbx3xPKbY" };
         async function subscribe(topic) {
-        swReg = await navigator.serviceWorker.register("/sw.js");
+        swReg = await navigator.serviceWorker.register("./sw.js");
         const subscription = await swReg.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: urlB64ToUint8Array(config.pushKey),
