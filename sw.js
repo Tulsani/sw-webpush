@@ -1,4 +1,5 @@
 self.addEventListener("push",(event)=>{
-    const msg = event.stopImmediatePropagation.json();
-    self.ServiceWorkerRegistration.showNotification(msg.title,{body:MessageChannel.text});
-})
+    const msg = JSON.parse(event.body.text());
+    event.waitUntil(
+    self.ServiceWorkerRegistration.showNotification(msg.title,{body:msg.text}));
+});
